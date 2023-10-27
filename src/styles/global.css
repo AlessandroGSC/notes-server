@@ -1,0 +1,35 @@
+/* COLORES */
+:root {
+    --color-primario: #71dbd2;
+    --color-fondo: #eeffdb;
+    --color-secundario: #ade4b5;
+    --color-rojo: #963121;
+    --color-light: #fff;
+    --color4: #d0eaa3;
+    --color5: #fff18c;
+}
+
+/* TIPOGRAFÍA */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #27293D;
+}
+
+h1 {
+    font-size: 24px;
+    color: var(--color-primario);
+}
+
+h2 {
+    font-size: 20px;
+    color: var(--color-secundario);
+}
+
+p {
+    font-size: 16px;
+}
+
+.error-text {
+    color: var(--color-rojo);
+    font-size: 12px;
+}
