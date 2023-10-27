@@ -4,9 +4,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3001; // Puedes cambiar el puerto si es necesario
+const port = 3001; 
 
-// Configuración de MySQL
 const db = mysql.createConnection({
   host: '127.0.0.1',
   user: 'root',
@@ -23,11 +22,9 @@ db.connect((err) => {
   }
 });
 
-// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
-// Rutas
 app.get('/api/notes', (req, res) => {
   db.query('SELECT * FROM notes_table', (err, result) => {
     if (err) {
@@ -39,7 +36,21 @@ app.get('/api/notes', (req, res) => {
   });
 });
 
-// Inicia el servidor
+app.post('/api/posts', (req, res) => {
+    const noteObj = req.body; 
+  
+    const queryInsert = 'INSERT INTO notes_table (note, note_done) VALUES (?, ?)';
+  
+    db.query(queryInsert, [noteObj.note, noteObj.noteDone], (err, resultado) => {
+      if (err) {
+        console.error('Error al crear la nota:', err);
+        res.status(500).json({ error: 'Error al crear la nota' });
+        return;
+      }
+      console.log('Nota creada:', resultado.insertId);
+      res.status(201).json({ id: resultado.insertId, message: 'NNota creada con éxito' });
+    });
+  });
 app.listen(port, () => {
   console.log(`Servidor Express en ejecución en el puerto ${port}`);
 });
